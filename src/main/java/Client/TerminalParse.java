@@ -25,22 +25,22 @@ public class TerminalParse {
             //-----------------------------------
             doc.getDocumentElement().normalize();
             //-----------------------------------
-            Node node = (Node) doc.getElementsByTagName("terminal");
-            String terminalID = String.valueOf(node.getAttributes().item(0));
+            NodeList terminalNode = doc.getElementsByTagName("terminal");
+            Node node = terminalNode.item(0);
+            Element e = (Element) node;
+            String  = e.getAttribute();
 
-            NodeList nList = doc.getElementsByTagName("transactions");
-
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-                Node nNode = nList.item(temp);
-                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                        Element eElement = (Element) nNode;
-                     //   String terminalID = eElement.getAttribute("id");
-                        String terminalType = eElement.getAttribute("type");
-                        TransAction transAction = new TransAction();
-                        transActionArray.add(transAction);
-
-                    }
-                }
+//            for (int temp = 0; temp < nList.getLength(); temp++) {
+//               // Node nNode = nList.item(temp);
+//                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+//                    Element eElement = (Element) nNode;
+//                    //   String terminalID = eElement.getAttribute("id");
+//                    String terminalType = eElement.getAttribute("type");
+//                    TransAction transAction = new TransAction();
+//                    transActionArray.add(transAction);
+//
+//                }
+//                }
         } catch (Exception e) {
             e.printStackTrace();
         }

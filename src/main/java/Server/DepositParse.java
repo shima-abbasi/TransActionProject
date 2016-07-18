@@ -36,8 +36,6 @@ public class DepositParse {
                 int initialBalance = Integer.parseInt(jsonDeposit.get("initialBalance").toString());
                 int upperBound = Integer.parseInt(jsonDeposit.get("upperBound").toString());
                 depositArray.add(new Deposit(customerName, customerID, initialBalance, upperBound));
-
-
             }
 
         } catch (FileNotFoundException ex) {

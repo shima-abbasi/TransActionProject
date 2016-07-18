@@ -5,4 +5,12 @@ package Server;
  */
 public class ServerInfo {
     private String serverPort;
+
+    public String getServerPort() {
+        return serverPort;
+    }
+
+    public void setServerPort(String serverPort) {
+        this.serverPort = serverPort;
+    }
 }

@@ -13,8 +13,10 @@ import java.util.ArrayList;
 /**
  * Created by Shima Abbasi on 7/18/2016.
  */
+
 public class DepositParse {
     ArrayList<Deposit> depositArray = new ArrayList<Deposit>();
+
     private final String filePath = "src/main/resources/core.json";
 
     public void jsonParserFunction() {
@@ -25,10 +27,14 @@ public class DepositParse {
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObject = (JSONObject)jsonParser.parse(reader);
-            // get a String from the JSON object
+
+
             int serverPort = Integer.parseInt(jsonObject.get("port").toString());
-            ServerInfo serverInfo = new ServerInfo(serverPort);
+            ServerInfo serverInfo = new ServerInfo();
+            serverInfo.setServerPort(serverPort);
+
             JSONArray deposits =(JSONArray)jsonObject.get("deposits");
+
             for(int i=0;i<deposits.size();i++){
                 Deposit deposit =new Deposit();
                 JSONObject jsonDeposit = (JSONObject) deposits.get(i);

@@ -3,6 +3,6 @@ package Server;
 /**
  * Created by Shima Abbasi on 7/18/2016.
  */
-public class DepositParse {
-    
+public class ServerInfo {
+    private String serverPort;
 }

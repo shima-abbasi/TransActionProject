@@ -26,11 +26,11 @@ public class DepositParse {
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObject = (JSONObject)jsonParser.parse(reader);
             // get a String from the JSON object
-            int serverPort = Integer.parseInt( jsonObject.get("port").toString());
+            int serverPort = Integer.parseInt(jsonObject.get("port").toString());
             ServerInfo serverInfo = new ServerInfo(serverPort);
             JSONArray deposits =(JSONArray)jsonObject.get("deposits");
-            for(Object deposit : deposits) {
-                JSONObject jsonDeposit =(JSONObject)deposit;
+            for(int i=0;i<deposits.size();i++){
+                JSONObject jsonDeposit = (JSONObject) deposits.get(i);
                 String customerName = (String)jsonDeposit.get("customer");
                 String customerID = (String)jsonDeposit.get("id");
                 int initialBalance = Integer.parseInt(jsonDeposit.get("initialBalance").toString());

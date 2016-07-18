@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 public class DepositParse {
-    ArrayList<Deposit> depositArray = new ArrayList<Deposit>();
+    ArrayList<Deposit> serverArray = new ArrayList<Deposit>();
 
     private final String filePath = "src/main/resources/core.json";
 
@@ -46,7 +46,7 @@ public class DepositParse {
                 deposit.setInitialBalance(initialBalance);
                 int upperBound = Integer.parseInt(jsonDeposit.get("upperBound").toString());
                 deposit.setUpperBound(upperBound);
-                depositArray.add(new Deposit(customerName, depositID, initialBalance, upperBound));
+                serverArray.add(new Deposit(customerName, depositID, initialBalance, upperBound));
             }
 
         } catch (FileNotFoundException ex) {

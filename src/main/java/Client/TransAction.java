@@ -15,4 +15,8 @@ public class TransAction {
         this.transactionAmount = transactionAmount;
         this.depositID = depositID;
     }
+
+    public TransAction() {
+
+    }
 }

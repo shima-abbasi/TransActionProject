@@ -33,19 +33,14 @@ public class DepositParse {
             ServerInfo serverInfo = new ServerInfo();
             serverInfo.setServerPort(serverPort);
 
-            JSONArray deposits =(JSONArray)jsonObject.get("deposits");
+            JSONArray deposits = (JSONArray) jsonObject.get("deposits");
 
             for(int i=0;i<deposits.size();i++){
-                Deposit deposit =new Deposit();
                 JSONObject jsonDeposit = (JSONObject) deposits.get(i);
                 String customerName = (String) jsonDeposit.get("customer");
-                deposit.setCustomerName(customerName);
                 String depositID = (String)jsonDeposit.get("id");
-                deposit.setDepositID(depositID);
                 int initialBalance = Integer.parseInt(jsonDeposit.get("initialBalance").toString());
-                deposit.setInitialBalance(initialBalance);
                 int upperBound = Integer.parseInt(jsonDeposit.get("upperBound").toString());
-                deposit.setUpperBound(upperBound);
                 serverArray.add(new Deposit(customerName, depositID, initialBalance, upperBound));
             }
 

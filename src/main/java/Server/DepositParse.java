@@ -30,12 +30,17 @@ public class DepositParse {
             ServerInfo serverInfo = new ServerInfo(serverPort);
             JSONArray deposits =(JSONArray)jsonObject.get("deposits");
             for(int i=0;i<deposits.size();i++){
+                Deposit deposit =new Deposit();
                 JSONObject jsonDeposit = (JSONObject) deposits.get(i);
-                String customerName = (String)jsonDeposit.get("customer");
-                String customerID = (String)jsonDeposit.get("id");
+                String customerName = (String) jsonDeposit.get("customer");
+                deposit.setCustomerName(customerName);
+                String depositID = (String)jsonDeposit.get("id");
+                deposit.setDepositID(depositID);
                 int initialBalance = Integer.parseInt(jsonDeposit.get("initialBalance").toString());
+                deposit.setInitialBalance(initialBalance);
                 int upperBound = Integer.parseInt(jsonDeposit.get("upperBound").toString());
-                depositArray.add(new Deposit(customerName, customerID, initialBalance, upperBound));
+                deposit.setUpperBound(upperBound);
+                depositArray.add(new Deposit(customerName, depositID, initialBalance, upperBound));
             }
 
         } catch (FileNotFoundException ex) {

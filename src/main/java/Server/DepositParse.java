@@ -18,7 +18,7 @@ public class DepositParse {
     private final String filePath = "src/main/resources/core.json";
 
     public void jsonParserFunction() {
-        ServerInfo serverInfo = new ServerInfo();
+
         try {
             // read the json file
             FileReader reader = new FileReader(filePath);
@@ -26,15 +26,15 @@ public class DepositParse {
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObject = (JSONObject)jsonParser.parse(reader);
             // get a String from the JSON object
-            String serverPort = (String) jsonObject.get("port");
-            serverInfo.setServerPort(serverPort);
+            int serverPort = Integer.parseInt( jsonObject.get("port").toString());
+            ServerInfo serverInfo = new ServerInfo(serverPort);
             JSONArray deposits =(JSONArray)jsonObject.get("deposits");
             for(Object deposit : deposits) {
-                JSONObject jsonObject1 = (JSONObject)deposit;
-                String customerName = (String) ((JSONObject) deposit).get("customer");
-                String customerID = (String) ((JSONObject) deposit).get("id");
-                int initialBalance = Integer.parseInt(String.valueOf((JSONObject)((JSONObject) deposit).get("initialBalance")));
-                int upperBound = Integer.parseInt(String.valueOf((JSONObject)((JSONObject) deposit).get("upperBound")));
+                JSONObject jsonDeposit =(JSONObject)deposit;
+                String customerName = (String)jsonDeposit.get("customer");
+                String customerID = (String)jsonDeposit.get("id");
+                int initialBalance = Integer.parseInt(jsonDeposit.get("initialBalance").toString());
+                int upperBound = Integer.parseInt(jsonDeposit.get("upperBound").toString());
                 depositArray.add(new Deposit(customerName, customerID, initialBalance, upperBound));
 
 

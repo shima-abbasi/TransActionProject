@@ -1,17 +1,17 @@
 {
     "port":8080,
-    "deposit":[
+    "deposits":[
         {
             "customer":"Ali Alavi",
             "id":"33227781",
             "initialBalance":"1,000",
-            "UpperBound":"1,000,000"
+            "upperBound":"1,000,000"
         },
         {
             "customer":"Ali Alavi",
             "id":"33227781",
             "initialBalance":"1,000",
-            "UpperBound":"1,000,000"
+            "upperBound":"1,000,000"
         }
     ],
     "outLog":"sever.out"

@@ -15,4 +15,16 @@ public class TerminalInfo {
         this.serverIP = serverIP;
         this.serverPort = serverPort;
     }
+
+    public TerminalInfo() {
+    }
+
+    public String getServerIP() {
+        return serverIP;
+    }
+
+    public String getServerPort() {
+        return serverPort;
+    }
+
 }

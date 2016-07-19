@@ -14,6 +14,11 @@ public class TerminalParse {
     ArrayList<TerminalInfo> terminalInfoArray = new ArrayList<TerminalInfo>();
     ArrayList<TransAction> transActionArray = new ArrayList<TransAction>();
     String serverPort;
+    String serverIP;
+
+    public String getServerIP() {
+        return serverIP;
+    }
 
     public String getServerPort() {
         return serverPort;
@@ -37,7 +42,7 @@ public class TerminalParse {
             //----------------server----------------------
             NodeList serverNode = doc.getElementsByTagName("server");
             NamedNodeMap serverAttributes = serverNode.item(0).getAttributes();
-            String serverIP = serverAttributes.item(0).getNodeValue();
+            serverIP = serverAttributes.item(0).getNodeValue();
             serverPort = serverAttributes.item(1).getNodeValue();
 
             terminalInfoArray.add(new TerminalInfo(terminalID, terminalType, serverIP, serverPort));

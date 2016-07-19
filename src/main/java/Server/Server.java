@@ -1,5 +1,6 @@
 package Server;
 
+import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -8,10 +9,15 @@ import java.net.Socket;
  */
 public class Server {
     public static void main(String[] args) {
-        ServerInfo serverInfo = null;
+        DepositParse depositParse = new DepositParse();
+        depositParse.jsonParserFunction();
+
         try {
-            ServerSocket serverSocket = new ServerSocket(serverInfo.getServerPort());
+            ServerSocket serverSocket = new ServerSocket(depositParse.getServerPort());
             Socket socket = serverSocket.accept();
+            serverSocket.setSoTimeout(10000);
+            DataOutputStream dos= new DataOutputStream(socket.getOutputStream());
+            dos.writeUTF("Heyyo");
         } catch (Exception e) {
             System.out.println(e);
         }

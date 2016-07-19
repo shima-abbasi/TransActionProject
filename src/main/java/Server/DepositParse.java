@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class DepositParse {
     ArrayList<Deposit> serverArray = new ArrayList<Deposit>();
-
+    int serverPort;
     private final String filePath = "src/main/resources/core.json";
     String logFilePath;
 
@@ -30,7 +30,7 @@ public class DepositParse {
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
 
 
-            int serverPort = Integer.parseInt(jsonObject.get("port").toString());
+            serverPort = Integer.parseInt(jsonObject.get("port").toString());
             ServerInfo serverInfo = new ServerInfo();
             serverInfo.setServerPort(serverPort);
 
@@ -58,4 +58,7 @@ public class DepositParse {
 
     }
 
+    public int getServerPort() {
+        return serverPort;
+    }
 }

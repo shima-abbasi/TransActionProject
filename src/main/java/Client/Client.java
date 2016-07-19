@@ -1,8 +1,6 @@
 package Client;
 
-import Server.ServerInfo;
-
-import java.io.OutputStream;
+import java.io.DataInputStream;
 import java.net.Socket;
 
 /**
@@ -10,11 +8,14 @@ import java.net.Socket;
  */
 public class Client {
     public static void main(String[] args) {
-        ServerInfo server = null;
-        TerminalInfo terminal = new TerminalInfo();
+        TerminalInfo terminalInfo= null;
+        TerminalParse terminalParse = new TerminalParse();
+        terminalParse.xmlParseFunction();
         try {
-            Socket socket = new Socket("localhost",Integer.parseInt(terminal.getServerPort()));
-            OutputStream out = socket.getOutputStream();
+            Socket socket = new Socket("localhost",Integer.parseInt(terminalParse.getServerPort()));
+            DataInputStream dis = new DataInputStream(socket.getInputStream());
+            String msg = dis.readUTF();
+            System.out.println(msg);
         } catch (Exception e) {
             System.out.println(e);
         }

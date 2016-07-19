@@ -11,9 +11,11 @@ import java.util.ArrayList;
  * Created by Shima Abbasi on 7/18/2016.
  */
 public class TerminalParse {
+    ArrayList<TerminalInfo> terminalInfoArray = new ArrayList<TerminalInfo>();
+    ArrayList<TransAction> transActionArray = new ArrayList<TransAction>();
+    String serverPort;
     public void xmlParseFunction() {
-        ArrayList<TerminalInfo> terminalInfoArray = new ArrayList<TerminalInfo>();
-        ArrayList<TransAction> transActionArray = new ArrayList<TransAction>();
+
         try {
             //----loading file-------------------
             File fXmlFile = new File("src/main/resources/terminal.XML");
@@ -31,7 +33,7 @@ public class TerminalParse {
             NodeList serverNode = doc.getElementsByTagName("server");
             NamedNodeMap serverAttributes = serverNode.item(0).getAttributes();
             String serverIP = serverAttributes.item(0).getNodeValue();
-            String serverPort = serverAttributes.item(1).getNodeValue();
+            serverPort = serverAttributes.item(1).getNodeValue();
 
             terminalInfoArray.add(new TerminalInfo(terminalID, terminalType, serverIP, serverPort));
 
@@ -52,5 +54,9 @@ public class TerminalParse {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getServerPort() {
+        return serverPort;
     }
 }

@@ -5,9 +5,9 @@ package Client;
  */
 public class TransAction {
     private String transactionID;
-    String transactionType;
-    String transactionAmount;
-    String depositID;
+    private String transactionType;
+    private String transactionAmount;
+    private String depositID;
 
     public TransAction(String transactionID, String transactionType, String transactionAmount, String depositID) {
         this.transactionID = transactionID;

@@ -1,6 +1,6 @@
 package Server;
 
-import java.io.DataOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
@@ -8,13 +8,10 @@ import java.net.Socket;
  */
 public class Server {
     public static void main(String[] args) {
+        ServerInfo serverInfo = null;
         try {
-            Socket s = new Socket("localhost", 6666);
-            DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-            dout.writeUTF("Hello Server");
-            dout.flush();
-            dout.close();
-            s.close();
+            ServerSocket serverSocket = new ServerSocket(serverInfo.getServerPort());
+            Socket socket = serverSocket.accept();
         } catch (Exception e) {
             System.out.println(e);
         }

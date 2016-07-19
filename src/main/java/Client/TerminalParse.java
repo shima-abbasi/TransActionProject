@@ -1,9 +1,6 @@
 package Client;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,6 +12,7 @@ import java.util.ArrayList;
  */
 public class TerminalParse {
     public void xmlParseFunction() {
+        ArrayList<TerminalInfo> terminalInfoArray = new ArrayList<TerminalInfo>();
         ArrayList<TransAction> transActionArray = new ArrayList<TransAction>();
         try {
             //----loading file-------------------
@@ -24,23 +22,33 @@ public class TerminalParse {
             Document doc = dBuilder.parse(fXmlFile);
             //-----------------------------------
             doc.getDocumentElement().normalize();
-            //-----------------------------------
+            //-----------------terminal------------------
             NodeList terminalNode = doc.getElementsByTagName("terminal");
-            Node node = terminalNode.item(0);
-            Element e = (Element) node;
-            String  = e.getAttribute();
+            NamedNodeMap terminalAttributes = terminalNode.item(0).getAttributes();
+            String terminalID = terminalAttributes.item(0).getNodeValue();
+            String terminalType = terminalAttributes.item(1).getNodeValue();
+            //----------------server----------------------
+            NodeList serverNode = doc.getElementsByTagName("server");
+            NamedNodeMap serverAttributes = serverNode.item(0).getAttributes();
+            String serverIP = serverAttributes.item(0).getNodeValue();
+            String serverPort = serverAttributes.item(1).getNodeValue();
 
-//            for (int temp = 0; temp < nList.getLength(); temp++) {
-//               // Node nNode = nList.item(temp);
-//                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-//                    Element eElement = (Element) nNode;
-//                    //   String terminalID = eElement.getAttribute("id");
-//                    String terminalType = eElement.getAttribute("type");
-//                    TransAction transAction = new TransAction();
-//                    transActionArray.add(transAction);
-//
-//                }
-//                }
+            terminalInfoArray.add(new TerminalInfo(terminalID, terminalType, serverIP, serverPort));
+
+            //--------------transAction--------------------
+            NodeList transActionNode = doc.getElementsByTagName("transaction");
+            for (int temp = 0; temp < transActionNode.getLength(); temp++) {
+                Node nNode = transActionNode.item(temp);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    NamedNodeMap transActionAttributes = transActionNode.item(temp).getAttributes();
+
+                    String transActionID = transActionAttributes.item(0).getNodeValue();
+                    String transActionType = transActionAttributes.item(1).getNodeValue();
+                    String transActionAmount = transActionAttributes.item(2).getNodeValue();
+                    String depositID = transActionAttributes.item(3).getNodeValue();
+                    transActionArray.add(new TransAction(transActionID, transActionType, transActionAmount, depositID));
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

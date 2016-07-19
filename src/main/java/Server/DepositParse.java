@@ -26,7 +26,7 @@ public class DepositParse {
             FileReader reader = new FileReader(filePath);
 
             JSONParser jsonParser = new JSONParser();
-            JSONObject jsonObject = (JSONObject)jsonParser.parse(reader);
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
 
 
             int serverPort = Integer.parseInt(jsonObject.get("port").toString());
@@ -35,10 +35,10 @@ public class DepositParse {
 
             JSONArray deposits = (JSONArray) jsonObject.get("deposits");
 
-            for(int i=0;i<deposits.size();i++){
+            for (int i = 0; i < deposits.size(); i++) {
                 JSONObject jsonDeposit = (JSONObject) deposits.get(i);
                 String customerName = (String) jsonDeposit.get("customer");
-                String depositID = (String)jsonDeposit.get("id");
+                String depositID = (String) jsonDeposit.get("id");
                 int initialBalance = Integer.parseInt(jsonDeposit.get("initialBalance").toString());
                 int upperBound = Integer.parseInt(jsonDeposit.get("upperBound").toString());
                 serverArray.add(new Deposit(customerName, depositID, initialBalance, upperBound));

@@ -19,6 +19,9 @@ public class DepositParse {
     int serverPort;
     private final String filePath = "src/main/resources/core.json";
     String logFilePath;
+    public int getServerPort() {
+        return serverPort;
+    }
 
     public void jsonParserFunction() {
 
@@ -56,9 +59,5 @@ public class DepositParse {
             ex.printStackTrace();
         }
 
-    }
-
-    public int getServerPort() {
-        return serverPort;
     }
 }

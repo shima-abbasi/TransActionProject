@@ -14,6 +14,11 @@ public class TerminalParse {
     ArrayList<TerminalInfo> terminalInfoArray = new ArrayList<TerminalInfo>();
     ArrayList<TransAction> transActionArray = new ArrayList<TransAction>();
     String serverPort;
+
+    public String getServerPort() {
+        return serverPort;
+    }
+
     public void xmlParseFunction() {
 
         try {
@@ -56,7 +61,4 @@ public class TerminalParse {
         }
     }
 
-    public String getServerPort() {
-        return serverPort;
-    }
 }

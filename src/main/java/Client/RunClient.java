@@ -1,11 +1,23 @@
 package Client;
 
+import java.io.DataInputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 /**
  * Created by Shima Abbasi on 7/19/2016.
  */
 public class RunClient {
     public static void main(String[] args) {
-        TerminalParse term = new TerminalParse();
-        term.xmlParseFunction();
+        try {
+            ServerSocket ss = new ServerSocket(6666);
+            Socket s = ss.accept();//establishes connection
+            DataInputStream dis = new DataInputStream(s.getInputStream());
+            String str = (String) dis.readUTF();
+            System.out.println("message= " + str);
+            ss.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

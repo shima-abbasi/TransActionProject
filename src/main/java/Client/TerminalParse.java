@@ -42,10 +42,10 @@ public class TerminalParse {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     NamedNodeMap transActionAttributes = transActionNode.item(temp).getAttributes();
 
-                    String transActionID = transActionAttributes.item(0).getNodeValue();
-                    String transActionType = transActionAttributes.item(1).getNodeValue();
-                    String transActionAmount = transActionAttributes.item(2).getNodeValue();
-                    String depositID = transActionAttributes.item(3).getNodeValue();
+                    String transActionID = transActionAttributes.getNamedItem("id").getNodeValue();
+                    String transActionType = transActionAttributes.getNamedItem("type").getNodeValue();
+                    String transActionAmount = transActionAttributes.getNamedItem("amount").getNodeValue();
+                    String depositID = transActionAttributes.getNamedItem("deposit").getNodeValue();
                     transActionArray.add(new TransAction(transActionID, transActionType, transActionAmount, depositID));
                 }
             }

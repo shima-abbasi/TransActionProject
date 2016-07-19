@@ -6,7 +6,7 @@ import java.net.Socket;
 /**
  * Created by Shima Abbasi on 7/19/2016.
  */
-public class RunServer {
+public class ServerSocket {
     public static void main(String[] args) {
         try {
             Socket s = new Socket("localhost", 6666);

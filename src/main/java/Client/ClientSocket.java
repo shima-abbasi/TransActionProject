@@ -7,7 +7,7 @@ import java.net.Socket;
 /**
  * Created by Shima Abbasi on 7/19/2016.
  */
-public class RunClient {
+public class ClientSocket {
     public static void main(String[] args) {
         try {
             ServerSocket ss = new ServerSocket(6666);

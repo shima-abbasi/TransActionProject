@@ -1,6 +1,9 @@
 package Client;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,7 +27,7 @@ public class TerminalParse {
         return serverPort;
     }
 
-    public void xmlParseFunction() {
+    public ArrayList<TransAction> xmlParseFunction() {
 
         try {
             //----loading file-------------------
@@ -45,7 +48,7 @@ public class TerminalParse {
             serverIP = serverAttributes.item(0).getNodeValue();
             serverPort = serverAttributes.item(1).getNodeValue();
 
-            terminalInfoArray.add(new TerminalInfo(terminalID, terminalType, serverIP, serverPort));
+            terminalInfoArray.add(new TerminalInfo(terminalID, terminalType));
 
             //--------------transAction--------------------
             NodeList transActionNode = doc.getElementsByTagName("transaction");
@@ -64,6 +67,6 @@ public class TerminalParse {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return transActionArray;
     }
-
 }

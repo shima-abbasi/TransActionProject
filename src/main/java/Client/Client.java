@@ -13,14 +13,14 @@ public class Client {
 
         TerminalInfo terminalInfo = null;
         TerminalParse terminalParse = new TerminalParse();
-        ArrayList<TransAction> transActionArray = terminalParse.getTransActionArray();
+        ArrayList<String> transActionArray = terminalParse.getTransActionArray();
         terminalParse.xmlParseFunction();
 
         try {
             Socket socket = new Socket("localhost", Integer.parseInt(terminalParse.getServerPort()));
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            for (TransAction transAction : transActionArray) {
+            for (String transAction : transActionArray) {
                 objectOutputStream.writeObject(transAction);
             }
 

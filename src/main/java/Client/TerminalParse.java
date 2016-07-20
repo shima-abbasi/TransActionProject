@@ -15,15 +15,13 @@ import java.util.ArrayList;
  * Created by Shima Abbasi on 7/18/2016.
  */
 public class  TerminalParse implements Serializable {
-    ArrayList<TerminalInfo> terminalInfoArray = new ArrayList<TerminalInfo>();
     ArrayList<TransAction> transActionArray = new ArrayList<TransAction>();
     String serverPort;
+    String serverIP;
 
     public ArrayList<TransAction> getTransActionArray() {
         return transActionArray;
     }
-
-    String serverIP;
 
     public String getServerIP() {
         return serverIP;
@@ -53,8 +51,6 @@ public class  TerminalParse implements Serializable {
             NamedNodeMap serverAttributes = serverNode.item(0).getAttributes();
             serverIP = serverAttributes.item(0).getNodeValue();
             serverPort = serverAttributes.item(1).getNodeValue();
-
-            terminalInfoArray.add(new TerminalInfo(terminalID, terminalType));
 
             //--------------transAction--------------------
             NodeList transActionNode = doc.getElementsByTagName("transaction");

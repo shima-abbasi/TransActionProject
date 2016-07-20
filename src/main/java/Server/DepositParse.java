@@ -19,11 +19,12 @@ public class DepositParse {
     int serverPort;
     private final String filePath = "src/main/resources/core.json";
     String logFilePath;
+
     public int getServerPort() {
         return serverPort;
     }
 
-    public void jsonParserFunction() {
+    public ArrayList<Deposit> jsonParserFunction() {
 
         try {
             // read the json file
@@ -47,7 +48,7 @@ public class DepositParse {
                 int upperBound = Integer.parseInt(jsonDeposit.get("upperBound").toString());
                 serverArray.add(new Deposit(customerName, depositID, initialBalance, upperBound));
             }
-            logFilePath = "src\\main\\resources\\"+(String)jsonObject.get("outLog");
+            logFilePath = "src\\main\\resources\\" + (String) jsonObject.get("outLog");
 
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -58,6 +59,6 @@ public class DepositParse {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
-
+        return serverArray;
     }
 }

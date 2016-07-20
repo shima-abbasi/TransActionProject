@@ -39,7 +39,6 @@ public class DepositParse {
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
 
-
             serverPort = Integer.parseInt(jsonObject.get("port").toString());
             ServerInfo serverInfo = new ServerInfo();
             serverInfo.setServerPort(serverPort);

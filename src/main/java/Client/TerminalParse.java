@@ -7,8 +7,7 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +18,22 @@ public class  TerminalParse implements Serializable {
     String serverIP;
     TransAction transAction;
     ArrayList<String> transActionArray = new ArrayList<String>();
+
+    public static void main(String[] args) {
+        TerminalParse instance = new TerminalParse();
+        instance.serverIP = "10.0.0.10";
+        instance.serverPort = "1234";
+        instance.transAction = null;
+
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(System.out);
+            out.writeObject(instance);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public ArrayList<String> getTransActionArray() {
         return transActionArray;

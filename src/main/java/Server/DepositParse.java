@@ -15,10 +15,12 @@ import java.util.ArrayList;
  */
 
 public class DepositParse {
-    ArrayList<Deposit> depositArray = new ArrayList<Deposit>();
+
     int serverPort;
-    private final String filePath = "src/main/resources/core.json";
     String logFilePath;
+    ArrayList<Deposit> depositArray = new ArrayList<Deposit>();
+    private final String filePath = "src/main/resources/core.json";
+
 
     public int getServerPort() {
         return serverPort;

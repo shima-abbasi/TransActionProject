@@ -1,6 +1,5 @@
 package Server;
 
-import java.io.DataInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -11,19 +10,12 @@ import java.util.ArrayList;
  * Created by Shima Abbasi on 7/19/2016.
  */
 public class Server {
-    DepositParse depositParse = new DepositParse();
-    depositParse.jsonParserFunction();
-    ArrayList<Deposit> depositArray = depositParse.getDepositArray();
-
+    static DepositParse depositParse ;
     public static void main(String[] args) {
+        depositParse = new DepositParse();
+        depositParse.jsonParserFunction();
+        ArrayList<Deposit> depositArray = depositParse.getDepositArray();
         new Server().runServer();
-        try {
-
-            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-            String s = dataInputStream.readUTF();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 
     public void runServer() {

@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * Created by Shima Abbasi on 7/19/2016.
  */
 public class Server {
+
     static DepositParse depositParse ;
     public static void main(String[] args) {
         depositParse = new DepositParse();

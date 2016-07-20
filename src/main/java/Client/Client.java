@@ -10,17 +10,20 @@ import java.util.ArrayList;
 public class Client {
 
     public static void main(String[] args) {
+
         TerminalInfo terminalInfo = null;
         TerminalParse terminalParse = new TerminalParse();
         ArrayList<TransAction> transActionArray = terminalParse.getTransActionArray();
         terminalParse.xmlParseFunction();
+
         try {
             Socket socket = new Socket("localhost", Integer.parseInt(terminalParse.getServerPort()));
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            ObjectOutputStream objectOutputStream= new ObjectOutputStream(socket.getOutputStream());
-            for( TransAction transAction : transActionArray){
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            for (TransAction transAction : transActionArray) {
                 objectOutputStream.writeObject(transAction);
             }
+
         } catch (Exception e) {
             System.out.println(e);
         }

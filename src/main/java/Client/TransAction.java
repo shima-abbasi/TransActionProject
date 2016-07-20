@@ -19,4 +19,7 @@ public class TransAction {
     public TransAction() {
 
     }
+    public String getString (){
+        return transactionID + "#" + transactionType + "#" + transactionAmount + "#" + depositID;
+    }
 }

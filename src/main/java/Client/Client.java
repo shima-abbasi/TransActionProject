@@ -16,9 +16,10 @@ public class Client {
         terminalParse.xmlParseFunction();
         try {
             Socket socket = new Socket("localhost", Integer.parseInt(terminalParse.getServerPort()));
-            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+            ObjectOutputStream objectOutputStream= new ObjectOutputStream(socket.getOutputStream());
             for( TransAction transAction : transActionArray){
-                dataOutputStream.writeUTF(transAction.toString());
+                objectOutputStream.writeObject(transAction);
             }
         } catch (Exception e) {
             System.out.println(e);

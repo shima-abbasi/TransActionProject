@@ -15,10 +15,10 @@ import java.util.ArrayList;
  * Created by Shima Abbasi on 7/18/2016.
  */
 public class  TerminalParse implements Serializable {
-    ArrayList<String> transActionArray = new ArrayList<String>();
     String serverPort;
     String serverIP;
     TransAction transAction;
+    ArrayList<String> transActionArray = new ArrayList<String>();
 
     public ArrayList<String> getTransActionArray() {
         return transActionArray;

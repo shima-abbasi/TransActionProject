@@ -1,6 +1,7 @@
 package Client;
 
-import java.io.*;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -20,9 +21,7 @@ public class Client {
             Socket socket = new Socket("localhost", Integer.parseInt(terminalParse.getServerPort()));
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            for (String transAction : transActionArray) {
-                objectOutputStream.writeObject(transAction);
-            }
+            objectOutputStream.writeObject(terminalParse.transActionArray);
 
         } catch (Exception e) {
             System.out.println(e);

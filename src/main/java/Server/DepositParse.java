@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 public class DepositParse {
-    ArrayList<Deposit> serverArray = new ArrayList<Deposit>();
+    ArrayList<Deposit> depositArray = new ArrayList<Deposit>();
     int serverPort;
     private final String filePath = "src/main/resources/core.json";
     String logFilePath;
@@ -46,7 +46,7 @@ public class DepositParse {
                 String depositID = (String) jsonDeposit.get("id");
                 int initialBalance = Integer.parseInt(jsonDeposit.get("initialBalance").toString());
                 int upperBound = Integer.parseInt(jsonDeposit.get("upperBound").toString());
-                serverArray.add(new Deposit(customerName, depositID, initialBalance, upperBound));
+                depositArray.add(new Deposit(customerName, depositID, initialBalance, upperBound));
             }
             logFilePath = "src\\main\\resources\\" + (String) jsonObject.get("outLog");
 
@@ -59,6 +59,8 @@ public class DepositParse {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
-        return serverArray;
+        return depositArray;
     }
+
+
 }

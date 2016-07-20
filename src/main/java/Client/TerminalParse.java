@@ -15,11 +15,12 @@ import java.util.ArrayList;
  * Created by Shima Abbasi on 7/18/2016.
  */
 public class  TerminalParse implements Serializable {
-    ArrayList<TransAction> transActionArray = new ArrayList<TransAction>();
+    ArrayList<String> transActionArray = new ArrayList<String>();
     String serverPort;
     String serverIP;
+    TransAction transAction;
 
-    public ArrayList<TransAction> getTransActionArray() {
+    public ArrayList<String> getTransActionArray() {
         return transActionArray;
     }
 
@@ -52,6 +53,7 @@ public class  TerminalParse implements Serializable {
             serverIP = serverAttributes.item(0).getNodeValue();
             serverPort = serverAttributes.item(1).getNodeValue();
 
+
             //--------------transAction--------------------
             NodeList transActionNode = doc.getElementsByTagName("transaction");
             for (int temp = 0; temp < transActionNode.getLength(); temp++) {
@@ -63,7 +65,7 @@ public class  TerminalParse implements Serializable {
                     String transActionType = transActionAttributes.getNamedItem("type").getNodeValue();
                     String transActionAmount = transActionAttributes.getNamedItem("amount").getNodeValue();
                     String depositID = transActionAttributes.getNamedItem("deposit").getNodeValue();
-                    transActionArray.add(new TransAction(transActionID, transActionType, transActionAmount, depositID));
+                    transActionArray.add(new TransAction(transActionID, transActionType, transActionAmount, depositID).getString());
                 }
             }
         } catch (Exception e) {

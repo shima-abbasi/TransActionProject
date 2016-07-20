@@ -10,9 +10,9 @@ import java.util.ArrayList;
  */
 public class Server {
     public static void main(String[] args) {
-        ArrayList<Deposit> depositArray = new ArrayList<Deposit>();
         DepositParse depositParse = new DepositParse();
-        depositArray = depositParse.jsonParserFunction();
+        depositParse.jsonParserFunction();
+        ArrayList<Deposit> depositArray = depositParse.getDepositArray();
 
         try {
             ServerSocket serverSocket = new ServerSocket(depositParse.getServerPort());

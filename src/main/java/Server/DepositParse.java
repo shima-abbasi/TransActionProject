@@ -24,7 +24,11 @@ public class DepositParse {
         return serverPort;
     }
 
-    public ArrayList<Deposit> jsonParserFunction() {
+    public ArrayList<Deposit> getDepositArray() {
+        return depositArray;
+    }
+
+    public void jsonParserFunction() {
 
         try {
             // read the json file
@@ -59,8 +63,6 @@ public class DepositParse {
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
-        return depositArray;
     }
-
 
 }

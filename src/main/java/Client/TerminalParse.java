@@ -8,15 +8,21 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Shima Abbasi on 7/18/2016.
  */
-public class TerminalParse {
+public class  TerminalParse implements Serializable {
     ArrayList<TerminalInfo> terminalInfoArray = new ArrayList<TerminalInfo>();
     ArrayList<TransAction> transActionArray = new ArrayList<TransAction>();
     String serverPort;
+
+    public ArrayList<TransAction> getTransActionArray() {
+        return transActionArray;
+    }
+
     String serverIP;
 
     public String getServerIP() {
@@ -27,7 +33,7 @@ public class TerminalParse {
         return serverPort;
     }
 
-    public ArrayList<TransAction> xmlParseFunction() {
+    public void xmlParseFunction() {
 
         try {
             //----loading file-------------------
@@ -67,6 +73,5 @@ public class TerminalParse {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return transActionArray;
     }
 }

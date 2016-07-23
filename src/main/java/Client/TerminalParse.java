@@ -13,29 +13,14 @@ import java.util.ArrayList;
 /**
  * Created by Shima Abbasi on 7/18/2016.
  */
-public class  TerminalParse implements Serializable {
+public class TerminalParse {
     String serverPort;
     String serverIP;
     TransAction transAction;
-    ArrayList<String> transActionArray = new ArrayList<String>();
+    ArrayList<TransAction> transActionArray = new ArrayList<TransAction>();
 
-    public static void main(String[] args) {
-        TerminalParse instance = new TerminalParse();
-        instance.serverIP = "10.0.0.10";
-        instance.serverPort = "1234";
-        instance.transAction = null;
 
-        try {
-            ObjectOutputStream out = new ObjectOutputStream(System.out);
-            out.writeObject(instance);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public ArrayList<String> getTransActionArray() {
+    public ArrayList<TransAction> getTransActionArray() {
         return transActionArray;
     }
 
@@ -80,7 +65,7 @@ public class  TerminalParse implements Serializable {
                     String transActionType = transActionAttributes.getNamedItem("type").getNodeValue();
                     String transActionAmount = transActionAttributes.getNamedItem("amount").getNodeValue();
                     String depositID = transActionAttributes.getNamedItem("deposit").getNodeValue();
-                    transActionArray.add(new TransAction(transActionID, transActionType, transActionAmount, depositID).getString());
+                    transActionArray.add(new TransAction(transActionID, transActionType, transActionAmount, depositID));
                 }
             }
         } catch (Exception e) {

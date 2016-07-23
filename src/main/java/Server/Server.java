@@ -1,7 +1,8 @@
 package Server;
 
+import Client.TransAction;
+
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -11,7 +12,8 @@ import java.util.ArrayList;
  */
 public class Server {
 
-    static DepositParse depositParse ;
+    static DepositParse depositParse;
+
     public static void main(String[] args) {
         depositParse = new DepositParse();
         depositParse.jsonParserFunction();
@@ -25,8 +27,8 @@ public class Server {
             Socket socket = serverSocket.accept();
             System.out.println("Server is up...");
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            ObjectOutputStream objectOutputStream= new ObjectOutputStream(socket.getOutputStream());
-            objectInputStream.readObject();
+            TransAction transAction =  (TransAction) objectInputStream.readObject();
+            System.out.println(transAction.getId());
             serverSocket.setSoTimeout(10000);
             socket.close();
 

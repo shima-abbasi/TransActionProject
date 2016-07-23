@@ -13,8 +13,9 @@ public class Client {
 
         TerminalInfo terminalInfo = null;
         TerminalParse terminalParse = new TerminalParse();
-        ArrayList<TransAction> transActionArray = terminalParse.getTransActionArray();
         terminalParse.xmlParseFunction();
+        ArrayList<TransAction> transActionArray = terminalParse.getTransActionArray();
+
 
         try {
             Socket socket = new Socket("localhost", Integer.parseInt(terminalParse.getServerPort()));

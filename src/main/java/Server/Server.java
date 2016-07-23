@@ -18,24 +18,31 @@ public class Server {
         depositParse = new DepositParse();
         depositParse.jsonParserFunction();
         ArrayList<Deposit> depositArray = depositParse.getDepositArray();
-        new Server().runServer();
+        TransAction transAction = new Server().runServer();
+        System.out.println(transAction.getId());
     }
 
-    public void runServer() {
+    public TransAction runServer() {
+
         try {
             ServerSocket serverSocket = new ServerSocket(depositParse.getServerPort());
-            Socket socket = serverSocket.accept();
+
             System.out.println("Server is up...");
-            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            TransAction transAction =  (TransAction) objectInputStream.readObject();
-            System.out.println(transAction.getId());
-            serverSocket.setSoTimeout(10000);
-            socket.close();
+            while (true) {
+                Socket socket = serverSocket.accept();
+                try {
+                    ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+                    return  (TransAction) objectInputStream.readObject();
+                } finally {
+                    socket.close();
+                }
+            }
 
 
         } catch (Exception e) {
             System.out.println(e);
         }
 
+        return null;
     }
 }

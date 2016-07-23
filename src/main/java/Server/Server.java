@@ -3,6 +3,7 @@ package Server;
 import Client.TransAction;
 
 import java.io.ObjectInputStream;
+import java.math.BigDecimal;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -11,17 +12,14 @@ import java.util.ArrayList;
  * Created by Shima Abbasi on 7/19/2016.
  */
 public class Server {
-
-    static DepositParse depositParse;
+    static DepositParse depositParse = new DepositParse();
+    static ArrayList<Deposit> depositArray = depositParse.getDepositArray();
 
     public static void main(String[] args) {
-        depositParse = new DepositParse();
         depositParse.jsonParserFunction();
-        ArrayList<Deposit> depositArray = depositParse.getDepositArray();
         TransAction transAction = new Server().runServer();
-        System.out.println(transAction.getId());
+        new Server().validation(transAction.getId(), transAction.getTransactionType(), transAction.getTransactionAmount(), transAction.getDepositID());
     }
-
     public TransAction runServer() {
 
         try {
@@ -32,7 +30,7 @@ public class Server {
                 Socket socket = serverSocket.accept();
                 try {
                     ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-                    return  (TransAction) objectInputStream.readObject();
+                    return (TransAction) objectInputStream.readObject();
                 } finally {
                     socket.close();
                 }
@@ -43,6 +41,19 @@ public class Server {
             System.out.println(e);
         }
 
+
         return null;
+    }
+
+    public boolean validation( int id, String type, BigDecimal amount , String depositId) {
+        if (depositId.equalsIgnoreCase();
+
+        return true;
+    }
+
+    public void transAction() {
+    }
+
+    public void findDeposit() {
     }
 }

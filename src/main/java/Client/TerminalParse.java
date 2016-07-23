@@ -8,6 +8,7 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -61,9 +62,9 @@ public class TerminalParse {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     NamedNodeMap transActionAttributes = transActionNode.item(temp).getAttributes();
 
-                    String transActionID = transActionAttributes.getNamedItem("id").getNodeValue();
+                    int transActionID = transActionAttributes.getNamedItem("id").getNodeValue();
                     String transActionType = transActionAttributes.getNamedItem("type").getNodeValue();
-                    String transActionAmount = transActionAttributes.getNamedItem("amount").getNodeValue();
+                    BigDecimal transActionAmount = transActionAttributes.getNamedItem("amount").getNodeValue();
                     String depositID = transActionAttributes.getNamedItem("deposit").getNodeValue();
                     transActionArray.add(new TransAction(transActionID, transActionType, transActionAmount, depositID));
                 }

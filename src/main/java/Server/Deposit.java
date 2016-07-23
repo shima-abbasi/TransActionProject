@@ -15,4 +15,20 @@ public class Deposit {
         this.initialBalance = initialBalance;
         this.upperBound = upperBound;
     }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public String getDepositID() {
+        return depositID;
+    }
+
+    public int getInitialBalance() {
+        return initialBalance;
+    }
+
+    public int getUpperBound() {
+        return upperBound;
+    }
 }

@@ -38,11 +38,5 @@ public class TransAction implements Serializable {
         this.depositID = depositID;
     }
 
-    public BigDecimal withDraw(BigDecimal amount, BigDecimal initialBalance) {
-        return initialBalance.subtract(amount);
-    }
 
-    public BigDecimal deposit(BigDecimal amount, BigDecimal initialBalance) {
-        return initialBalance.add(amount);
-    }
 }

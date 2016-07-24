@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -54,8 +55,8 @@ public class DepositParse {
                 JSONObject jsonDeposit = (JSONObject) deposits.get(i);
                 String customerName = (String) jsonDeposit.get("customer");
                 String depositID = (String) jsonDeposit.get("id");
-                int initialBalance = Integer.parseInt(jsonDeposit.get("initialBalance").toString());
-                int upperBound = Integer.parseInt(jsonDeposit.get("upperBound").toString());
+                BigDecimal initialBalance = new BigDecimal(jsonDeposit.get("initialBalance").toString());
+                BigDecimal upperBound = new BigDecimal(jsonDeposit.get("upperBound").toString());
                 depositArray.add(new Deposit(customerName, depositID, initialBalance, upperBound));
             }
             logFilePath = "src\\main\\resources\\" + (String) jsonObject.get("outLog");

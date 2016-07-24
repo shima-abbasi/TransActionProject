@@ -3,6 +3,7 @@ package Server;
 import Client.TransAction;
 import Server.Exceptions.NotFoundDeposit;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -11,11 +12,14 @@ import java.util.ArrayList;
 public class Deposit {
     private String customerName;
     private String depositID;
-    private int initialBalance;
-    private int upperBound;
+    private BigDecimal initialBalance;
+    private BigDecimal upperBound;
     DepositParse depositParse;
 
-    public Deposit(String customerName, String depositID, int initialBalance, int upperBound) {
+    public Deposit() {
+    }
+
+    public Deposit(String customerName, String depositID, BigDecimal initialBalance, BigDecimal upperBound) {
         this.customerName = customerName;
         this.depositID = depositID;
         this.initialBalance = initialBalance;
@@ -30,32 +34,35 @@ public class Deposit {
         return depositID;
     }
 
-    public int getInitialBalance() {
+    public BigDecimal getInitialBalance() {
         return initialBalance;
     }
 
-    public int getUpperBound() {
+    public BigDecimal getUpperBound() {
         return upperBound;
     }
 
-    public boolean validation(TransAction transAction) {
-
-        try{
-            Deposit deposit = findDeposit(transAction.getDepositID());
-        }catch ( NotFoundDeposit e){
-            System.out.println("Your Deposit ID not exist");
-
-        }
+    public Deposit validation(TransAction transAction) throws NotFoundDeposit {
+        Deposit deposit = findDeposit(transAction.getDepositID());
+        return deposit;
     }
-    public Deposit findDeposit(String depositID) throws NotFoundDeposit{
-        ArrayList <Deposit> depositArray = depositParse.getDepositArray();
-        for(Deposit deposit : depositArray)
-        {
-            if(deposit.getDepositID().equals(depositID)) {
+
+    public Deposit findDeposit(String depositID) throws NotFoundDeposit {
+        ArrayList<Deposit> depositArray = depositParse.getDepositArray();
+        for (Deposit deposit : depositArray) {
+            if (deposit.getDepositID().equals(depositID)) {
                 return deposit;
             }
         }
-
-        return null;
+        throw new NotFoundDeposit("This deposit doesn't exist");
     }
+
+    public BigDecimal withDraw(BigDecimal amount, BigDecimal initialBalance) {
+        return initialBalance.subtract(amount);
+    }
+
+    public BigDecimal deposit(BigDecimal amount, BigDecimal initialBalance) {
+        return initialBalance.add(amount);
+    }
+
 }

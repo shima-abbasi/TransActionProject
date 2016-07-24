@@ -62,9 +62,9 @@ public class TerminalParse {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     NamedNodeMap transActionAttributes = transActionNode.item(temp).getAttributes();
 
-                    int transActionID = transActionAttributes.getNamedItem("id").getNodeValue();
+                    int transActionID = Integer.parseInt(transActionAttributes.getNamedItem("id").getNodeValue());
                     String transActionType = transActionAttributes.getNamedItem("type").getNodeValue();
-                    BigDecimal transActionAmount = transActionAttributes.getNamedItem("amount").getNodeValue();
+                    BigDecimal transActionAmount = new BigDecimal(transActionAttributes.getNamedItem("amount").getNodeValue());
                     String depositID = transActionAttributes.getNamedItem("deposit").getNodeValue();
                     transActionArray.add(new TransAction(transActionID, transActionType, transActionAmount, depositID));
                 }

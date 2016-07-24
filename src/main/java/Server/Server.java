@@ -13,47 +13,40 @@ import java.util.ArrayList;
  */
 public class Server {
     static DepositParse depositParse = new DepositParse();
-    static ArrayList<Deposit> depositArray = depositParse.getDepositArray();
+    static ArrayList<Deposit> depositArray;
 
     public static void main(String[] args) {
         depositParse.jsonParserFunction();
-        TransAction transAction = new Server().runServer();
-        new Server().validation(transAction.getId(), transAction.getTransactionType(), transAction.getTransactionAmount(), transAction.getDepositID());
+        depositArray = depositParse.getDepositArray();
+        new Server().runServer();
     }
-    public TransAction runServer() {
 
+    public void runServer() {
         try {
             ServerSocket serverSocket = new ServerSocket(depositParse.getServerPort());
-
             System.out.println("Server is up...");
+            Socket socket = serverSocket.accept();
             while (true) {
-                Socket socket = serverSocket.accept();
                 try {
                     ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-                    return (TransAction) objectInputStream.readObject();
+                    TransAction transAction = (TransAction) objectInputStream.readObject();
+                    doTransAction(transAction);
                 } finally {
                     socket.close();
                 }
             }
-
-
         } catch (Exception e) {
             System.out.println(e);
         }
-
-
-        return null;
     }
 
-    public boolean validation( int id, String type, BigDecimal amount , String depositId) {
-        if (depositId.equalsIgnoreCase();
+    public void doTransAction(TransAction transAction) {
+        if (Validation(transAction) && transAction.getTransactionType() = "deposit") {
+            transAction.deposit(transAction.getTransactionAmount() ,);
 
-        return true;
-    }
 
-    public void transAction() {
-    }
-
-    public void findDeposit() {
+        } else if (Validation(transAction) && transAction.getTransactionType() = "withdraw") {
+            transAction.withDraw(transAction.getTransactionAmount(),);
+        }
     }
 }

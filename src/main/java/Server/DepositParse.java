@@ -19,6 +19,11 @@ public class DepositParse {
     int serverPort;
     String logFilePath;
     ArrayList<Deposit> depositArray = new ArrayList<Deposit>();
+
+    public void setDepositArray(ArrayList<Deposit> depositArray) {
+        this.depositArray = depositArray;
+    }
+
     private final String filePath = "src/main/resources/core.json";
 
 

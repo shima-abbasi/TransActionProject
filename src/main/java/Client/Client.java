@@ -15,10 +15,9 @@ public class Client {
         try {
             Socket socket = new Socket(terminalParse.getServerIP(), Integer.parseInt(terminalParse.getServerPort()));
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-
             objectOutputStream.writeObject(transactionArray);
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            while (true) {
+            while(true){
                 System.out.println(objectInputStream.readObject());
             }
         } catch (UnknownHostException e) {

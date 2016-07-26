@@ -43,7 +43,7 @@ public class Deposit {
         return upperBound;
     }
 
-    public Deposit validation(Transaction transaction, ArrayList<Deposit> depositArray) throws NotFoundDeposit {
+    public Deposit checkValidation(Transaction transaction, ArrayList<Deposit> depositArray) throws NotFoundDeposit {
         Deposit deposit = findDeposit(transaction.getDepositID(), depositArray);
         return deposit;
     }

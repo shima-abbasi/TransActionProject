@@ -4,7 +4,6 @@ import Client.Transaction;
 import Server.Exceptions.InitialBalanceLimitationException;
 import Server.Exceptions.NotFoundDeposit;
 import Server.Exceptions.UpperBoundLimitationException;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -49,7 +48,7 @@ public class MainServer {
         BigDecimal newBalance = null;
         try {
             String type = transaction.getTransactionType();
-            Deposit deposit1 = deposit.validation(transaction, depositArray);
+            Deposit deposit1 = deposit.checkValidation(transaction, depositArray);
             if (type.equalsIgnoreCase("deposit")) {
                 newBalance = deposit.deposit(transaction.getTransactionAmount(), deposit1.getInitialBalance(), deposit1.getUpperBound());
             } else if (type.equalsIgnoreCase("withdraw")) {

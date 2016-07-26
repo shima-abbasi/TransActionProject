@@ -57,6 +57,10 @@ public class Deposit {
         throw new NotFoundDeposit("This deposit doesn't exist");
     }
 
+    public void setInitialBalance(BigDecimal initialBalance) {
+        this.initialBalance = initialBalance;
+    }
+
     public BigDecimal withDraw(BigDecimal amount, BigDecimal initialBalance ,BigDecimal upperBound) throws InitialBalanceLimitationException {
         if(initialBalance.subtract(amount).compareTo(BigDecimal.ZERO) <= 0)
             throw new InitialBalanceLimitationException("InitialBalance limitation");

@@ -1,6 +1,7 @@
 package Client;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -18,11 +19,18 @@ public class Client {
         try {
             Socket socket = new Socket("localhost", Integer.parseInt(terminalParse.getServerPort()));
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+
             objectOutputStream.writeObject(transactionArray);
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+            while (true) {
+                System.out.println(objectInputStream.readObject());
+            }
         } catch (UnknownHostException e1) {
             e1.printStackTrace();
         } catch (IOException e1) {
             e1.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

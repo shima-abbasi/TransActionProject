@@ -1,12 +1,14 @@
 package Server;
 import Client.Transaction;
+import Server.Exceptions.InitialBalanceLimitationException;
 import Server.Exceptions.NotFoundDeposit;
+import Server.Exceptions.UpperBoundLimitationException;
+
 import java.io.ObjectInputStream;
 import java.math.BigDecimal;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainServer {
     static DepositParse depositParse = new DepositParse();
@@ -26,9 +28,9 @@ public class MainServer {
             System.out.println("Server is up...");
             Socket socket = serverSocket.accept();
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            List<Transaction> transactions = (List<Transaction>) objectInputStream.readObject();
+            ArrayList<Transaction> transactions = (ArrayList<Transaction>) objectInputStream.readObject();
             for (Transaction transaction : transactions) {
-                System.out.println(doTransAction(transaction));
+                doTransAction(transaction);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -45,8 +47,13 @@ public class MainServer {
             } else if (type.equalsIgnoreCase("withdraw")) {
                 newBalance = deposit.withDraw(transaction.getTransactionAmount(), deposit1.getInitialBalance() , deposit1.getUpperBound());
             }
+            System.out.println(newBalance);
         } catch (NotFoundDeposit e) {
-            System.out.println("??");
+            e.printStackTrace();
+        } catch (UpperBoundLimitationException e) {
+            e.printStackTrace();
+        } catch (InitialBalanceLimitationException e) {
+            e.printStackTrace();
         }
         return newBalance;
     }

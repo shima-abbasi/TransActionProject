@@ -12,17 +12,13 @@ import java.util.ArrayList;
 public class Client {
 
     public static void main(String[] args) {
-
-        // TerminalInfo terminalInfo = null;
         TerminalParse terminalParse = new TerminalParse();
         terminalParse.xmlParseFunction();
-        ArrayList<TransAction> transActionArray = terminalParse.getTransActionArray();
-
-
+        ArrayList<Client.Transaction> transactionArray = terminalParse.getTransactionArray();
         try {
             Socket socket = new Socket("localhost", Integer.parseInt(terminalParse.getServerPort()));
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            objectOutputStream.writeObject(transActionArray);
+            objectOutputStream.writeObject(transactionArray);
         } catch (UnknownHostException e1) {
             e1.printStackTrace();
         } catch (IOException e1) {

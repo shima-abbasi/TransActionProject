@@ -1,6 +1,6 @@
 package Server;
 
-import Client.TransAction;
+import Client.Transaction;
 import Server.Exceptions.NotFoundDeposit;
 
 import java.math.BigDecimal;
@@ -41,8 +41,8 @@ public class Deposit {
         return upperBound;
     }
 
-    public Deposit validation(TransAction transAction , ArrayList<Deposit> depositArray) throws NotFoundDeposit {
-        Deposit deposit = findDeposit(transAction.getDepositID(), depositArray);
+    public Deposit validation(Transaction transaction, ArrayList<Deposit> depositArray) throws NotFoundDeposit {
+        Deposit deposit = findDeposit(transaction.getDepositID(), depositArray);
         return deposit;
     }
 

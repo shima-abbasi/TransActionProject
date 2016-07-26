@@ -17,12 +17,12 @@ import java.util.ArrayList;
 public class TerminalParse {
     String serverPort;
     String serverIP;
-    TransAction transAction;
-    ArrayList<TransAction> transActionArray = new ArrayList<TransAction>();
+    Transaction transaction;
+    ArrayList<Transaction> transactionArray = new ArrayList<Transaction>();
 
 
-    public ArrayList<TransAction> getTransActionArray() {
-        return transActionArray;
+    public ArrayList<Transaction> getTransactionArray() {
+        return transactionArray;
     }
 
     public String getServerIP() {
@@ -55,7 +55,7 @@ public class TerminalParse {
             serverPort = serverAttributes.item(1).getNodeValue();
 
 
-            //--------------transAction--------------------
+            //--------------transaction--------------------
             NodeList transActionNode = doc.getElementsByTagName("transaction");
             for (int temp = 0; temp < transActionNode.getLength(); temp++) {
                 Node nNode = transActionNode.item(temp);
@@ -66,7 +66,7 @@ public class TerminalParse {
                     String transActionType = transActionAttributes.getNamedItem("type").getNodeValue();
                     BigDecimal transActionAmount = new BigDecimal(transActionAttributes.getNamedItem("amount").getNodeValue());
                     String depositID = transActionAttributes.getNamedItem("deposit").getNodeValue();
-                    transActionArray.add(new TransAction(transActionID, transActionType, transActionAmount, depositID));
+                    transactionArray.add(new Transaction(transActionID, transActionType, transActionAmount, depositID));
                 }
             }
         } catch (Exception e) {

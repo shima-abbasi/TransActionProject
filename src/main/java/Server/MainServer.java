@@ -1,6 +1,6 @@
 package Server;
 
-import Client.TransAction;
+import Client.Transaction;
 import Server.Exceptions.NotFoundDeposit;
 
 import java.io.ObjectInputStream;
@@ -33,25 +33,25 @@ public class MainServer {
             System.out.println("Server is up...");
             Socket socket = serverSocket.accept();
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            List<TransAction> transActions = (List<TransAction>) objectInputStream.readObject();
-            for (TransAction transAction : transActions) {
+            List<Transaction> transactions = (List<Transaction>) objectInputStream.readObject();
+            for (Transaction transaction : transactions) {
                 System.out.println("eeeeeeeeeee");
-                System.out.println(doTransAction(transAction));
+                System.out.println(doTransAction(transaction));
             }
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public BigDecimal doTransAction(TransAction transAction) {
+    public BigDecimal doTransAction(Transaction transaction) {
         BigDecimal newBalance = null;
         try {
-            String type = transAction.getTransactionType();
-            Deposit deposit1 = deposit.validation(transAction , depositArray);
+            String type = transaction.getTransactionType();
+            Deposit deposit1 = deposit.validation(transaction, depositArray);
             if (type.equalsIgnoreCase("deposit")) {
-                newBalance = deposit.deposit(transAction.getTransactionAmount(), deposit1.getInitialBalance());
+                newBalance = deposit.deposit(transaction.getTransactionAmount(), deposit1.getInitialBalance());
             } else if (type.equalsIgnoreCase("withdraw")) {
-                newBalance = deposit.withDraw(transAction.getTransactionAmount(), deposit1.getInitialBalance());
+                newBalance = deposit.withDraw(transaction.getTransactionAmount(), deposit1.getInitialBalance());
             }
         } catch (NotFoundDeposit e) {
             System.out.println("??");

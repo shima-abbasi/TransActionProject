@@ -12,6 +12,16 @@ public class Transaction implements Serializable {
     private BigDecimal transactionAmount;
     private String depositID;
 
+    public Transaction() {
+    }
+
+    public Transaction(int id, String transactionType, BigDecimal transactionAmount, String depositID) {
+        this.id = id;
+        this.transactionType = transactionType;
+        this.transactionAmount = transactionAmount;
+        this.depositID = depositID;
+    }
+
     public int getId() {
         return id;
     }
@@ -28,9 +38,6 @@ public class Transaction implements Serializable {
         return depositID;
     }
 
-    public Transaction() {
-    }
-
     @Override
     public String toString() {
         return "TransAction{" +
@@ -39,13 +46,6 @@ public class Transaction implements Serializable {
                 ", transactionAmount=" + transactionAmount +
                 ", depositID='" + depositID + '\'' +
                 '}';
-    }
-
-    public Transaction(int id, String transactionType, BigDecimal transactionAmount, String depositID) {
-        this.id = id;
-        this.transactionType = transactionType;
-        this.transactionAmount = transactionAmount;
-        this.depositID = depositID;
     }
 
 

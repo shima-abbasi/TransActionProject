@@ -4,8 +4,8 @@
         {
             "customer":"Ali Alavi",
             "id":"33227781",
-            "initialBalance":"1000",
-            "upperBound":"1000000"
+            "initialBalance":"1,000",
+            "upperBound":"1,000,000"
         },
         {
             "customer":"Reza Rezaei",

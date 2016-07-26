@@ -39,14 +39,6 @@ public class Transaction implements Serializable {
         return transactionAmount;
     }
 
-    @Override
-    public String toString() {
-        return "TransAction{" +
-                "id=" + id +
-                ", transactionType='" + transactionType + '\'' +
-                ", transactionAmount=" + transactionAmount +
-                ", depositID='" + depositID + '\'' +
-                '}';
-    }
+
 
 }

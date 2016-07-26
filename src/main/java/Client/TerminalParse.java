@@ -64,7 +64,7 @@ public class TerminalParse {
 
                     int transActionID = Integer.parseInt(transActionAttributes.getNamedItem("id").getNodeValue());
                     String transActionType = transActionAttributes.getNamedItem("type").getNodeValue();
-                    BigDecimal transActionAmount = new BigDecimal(transActionAttributes.getNamedItem("amount").getNodeValue());
+                    BigDecimal transActionAmount = new BigDecimal(transActionAttributes.getNamedItem("amount").getNodeValue().replaceAll("," , ""));
                     String depositID = transActionAttributes.getNamedItem("deposit").getNodeValue();
                     transactionArray.add(new Transaction(transActionID, transActionType, transActionAmount, depositID));
                 }

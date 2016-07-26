@@ -4,6 +4,7 @@ import Client.Transaction;
 import Server.Exceptions.InitialBalanceLimitationException;
 import Server.Exceptions.NotFoundDeposit;
 import Server.Exceptions.UpperBoundLimitationException;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -54,8 +55,8 @@ public class MainServer {
             } else if (type.equalsIgnoreCase("withdraw")) {
                 newBalance = deposit.withDraw(transaction.getTransactionAmount(), deposit1.getInitialBalance(), deposit1.getUpperBound());
             }
-                deposit1.setInitialBalance(newBalance);
-                objectOutputStream.writeObject("Transaction was successful .New initial balance is " + newBalance);
+            deposit1.setInitialBalance(newBalance);
+            objectOutputStream.writeObject("Transaction was successful .New initial balance is " + newBalance);
 
         } catch (NotFoundDeposit e) {
             objectOutputStream.writeObject(e.getMessage());

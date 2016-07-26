@@ -1,7 +1,9 @@
 package Server;
 
 import Client.Transaction;
+import Server.Exceptions.InitialBalanceLimitationException;
 import Server.Exceptions.NotFoundDeposit;
+import Server.Exceptions.UpperBoundLimitationException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -55,12 +57,16 @@ public class Deposit {
         throw new NotFoundDeposit("This deposit doesn't exist");
     }
 
-    public BigDecimal withDraw(BigDecimal amount, BigDecimal initialBalance) {
+    public BigDecimal withDraw(BigDecimal amount, BigDecimal initialBalance ,BigDecimal upperBound) throws InitialBalanceLimitationException {
+        if(initialBalance.subtract(amount).compareTo(BigDecimal.ZERO) <= 0)
+            throw new InitialBalanceLimitationException("InitialBalance limitation");
         return initialBalance.subtract(amount);
     }
 
-    public BigDecimal deposit(BigDecimal amount, BigDecimal initialBalance) {
+    public BigDecimal deposit(BigDecimal amount, BigDecimal initialBalance , BigDecimal upperBound)throws UpperBoundLimitationException {
+        if ((initialBalance.add(amount)).compareTo(upperBound) > 0)
+            throw  new UpperBoundLimitationException("UpperBound limitation");
         return initialBalance.add(amount);
     }
-
 }
+

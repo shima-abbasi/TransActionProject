@@ -1,8 +1,6 @@
 package Server;
-
 import Client.Transaction;
 import Server.Exceptions.NotFoundDeposit;
-
 import java.io.ObjectInputStream;
 import java.math.BigDecimal;
 import java.net.ServerSocket;
@@ -10,9 +8,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Shima Abbasi on 7/19/2016.
- */
 public class MainServer {
     static DepositParse depositParse = new DepositParse();
     static Deposit deposit = new Deposit();
@@ -23,8 +18,6 @@ public class MainServer {
         depositParse.jsonParserFunction();
         depositArray = depositParse.getDepositArray();
         mainServer.runServer();
-
-
     }
 
     public void runServer() {
@@ -35,7 +28,6 @@ public class MainServer {
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
             List<Transaction> transactions = (List<Transaction>) objectInputStream.readObject();
             for (Transaction transaction : transactions) {
-                System.out.println("eeeeeeeeeee");
                 System.out.println(doTransAction(transaction));
             }
         } catch (Exception e) {
@@ -49,9 +41,9 @@ public class MainServer {
             String type = transaction.getTransactionType();
             Deposit deposit1 = deposit.validation(transaction, depositArray);
             if (type.equalsIgnoreCase("deposit")) {
-                newBalance = deposit.deposit(transaction.getTransactionAmount(), deposit1.getInitialBalance());
+                newBalance = deposit.deposit(transaction.getTransactionAmount(), deposit1.getInitialBalance() , deposit1.getUpperBound());
             } else if (type.equalsIgnoreCase("withdraw")) {
-                newBalance = deposit.withDraw(transaction.getTransactionAmount(), deposit1.getInitialBalance());
+                newBalance = deposit.withDraw(transaction.getTransactionAmount(), deposit1.getInitialBalance() , deposit1.getUpperBound());
             }
         } catch (NotFoundDeposit e) {
             System.out.println("??");

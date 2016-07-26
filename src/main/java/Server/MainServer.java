@@ -13,8 +13,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class MainServer {
-    static DepositParse depositParse = new DepositParse();
     static Deposit deposit = new Deposit();
+    static DepositParse depositParse = new DepositParse();
     static ArrayList<Deposit> depositArray;
     ServerSocket serverSocket;
     Socket socket;
@@ -22,7 +22,6 @@ public class MainServer {
 
     public static void main(String[] args) {
         MainServer mainServer = new MainServer();
-
         depositParse.jsonParserFunction();
         depositArray = depositParse.getDepositArray();
         mainServer.runServer();
@@ -45,7 +44,7 @@ public class MainServer {
     }
 
     public void doTransaction(Transaction transaction) throws IOException {
-        BigDecimal newBalance = null;
+        BigDecimal newBalance = BigDecimal.ZERO;
         try {
             String type = transaction.getTransactionType();
             Deposit deposit1 = deposit.checkValidation(transaction, depositArray);

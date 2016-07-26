@@ -59,7 +59,7 @@ public class DepositParse {
                 BigDecimal upperBound = new BigDecimal(jsonDeposit.get("upperBound").toString());
                 depositArray.add(new Deposit(customerName, depositID, initialBalance, upperBound));
             }
-            logFilePath = "src\\main\\resources\\" + (String) jsonObject.get("outLog");
+          //  logFilePath = "src\\main\\resources\\" + (String) jsonObject.get("outLog");
 
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();

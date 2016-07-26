@@ -31,6 +31,16 @@ public class TransAction implements Serializable {
     public TransAction() {
     }
 
+    @Override
+    public String toString() {
+        return "TransAction{" +
+                "id=" + id +
+                ", transactionType='" + transactionType + '\'' +
+                ", transactionAmount=" + transactionAmount +
+                ", depositID='" + depositID + '\'' +
+                '}';
+    }
+
     public TransAction(int id, String transactionType, BigDecimal transactionAmount, String depositID) {
         this.id = id;
         this.transactionType = transactionType;

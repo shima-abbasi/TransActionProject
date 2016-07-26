@@ -14,7 +14,6 @@ public class Deposit {
     private String depositID;
     private BigDecimal initialBalance;
     private BigDecimal upperBound;
-    DepositParse depositParse;
 
     public Deposit() {
     }
@@ -42,13 +41,12 @@ public class Deposit {
         return upperBound;
     }
 
-    public Deposit validation(TransAction transAction) throws NotFoundDeposit {
-        Deposit deposit = findDeposit(transAction.getDepositID());
+    public Deposit validation(TransAction transAction , ArrayList<Deposit> depositArray) throws NotFoundDeposit {
+        Deposit deposit = findDeposit(transAction.getDepositID(), depositArray);
         return deposit;
     }
 
-    public Deposit findDeposit(String depositID) throws NotFoundDeposit {
-        ArrayList<Deposit> depositArray = depositParse.getDepositArray();
+    public Deposit findDeposit(String depositID, ArrayList<Deposit> depositArray) throws NotFoundDeposit {
         for (Deposit deposit : depositArray) {
             if (deposit.getDepositID().equals(depositID)) {
                 return deposit;

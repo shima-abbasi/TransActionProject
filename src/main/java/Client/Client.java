@@ -1,7 +1,9 @@
 package Client;
 
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +13,7 @@ public class Client {
 
     public static void main(String[] args) {
 
-        TerminalInfo terminalInfo = null;
+        // TerminalInfo terminalInfo = null;
         TerminalParse terminalParse = new TerminalParse();
         terminalParse.xmlParseFunction();
         ArrayList<TransAction> transActionArray = terminalParse.getTransActionArray();
@@ -20,13 +22,11 @@ public class Client {
         try {
             Socket socket = new Socket("localhost", Integer.parseInt(terminalParse.getServerPort()));
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            for(TransAction transAction : transActionArray){
-                objectOutputStream.writeObject(transAction);
-                objectOutputStream.flush();
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
+            objectOutputStream.writeObject(transActionArray);
+        } catch (UnknownHostException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
     }
 }

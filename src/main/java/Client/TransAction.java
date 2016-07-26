@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 /**
  * Created by Shima Abbasi on 7/18/2016.
  */
-public class TransAction implements Serializable {
+public class Transaction implements Serializable {
     private int id;
     private String transactionType;
     private BigDecimal transactionAmount;
@@ -28,7 +28,7 @@ public class TransAction implements Serializable {
         return depositID;
     }
 
-    public TransAction() {
+    public Transaction() {
     }
 
     @Override
@@ -41,7 +41,7 @@ public class TransAction implements Serializable {
                 '}';
     }
 
-    public TransAction(int id, String transactionType, BigDecimal transactionAmount, String depositID) {
+    public Transaction(int id, String transactionType, BigDecimal transactionAmount, String depositID) {
         this.id = id;
         this.transactionType = transactionType;
         this.transactionAmount = transactionAmount;

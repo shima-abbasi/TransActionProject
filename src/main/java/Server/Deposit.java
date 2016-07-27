@@ -54,20 +54,20 @@ public class Deposit {
                 return deposit;
             }
         }
-        throw new NotFoundDeposit("This deposit doesn't exist");
+        throw new NotFoundDeposit("This doDeposit doesn't exist");
     }
 
     public void setInitialBalance(BigDecimal initialBalance) {
         this.initialBalance = initialBalance;
     }
 
-    public BigDecimal withDraw(BigDecimal amount, BigDecimal initialBalance ,BigDecimal upperBound) throws InitialBalanceLimitationException {
+    public synchronized BigDecimal doWithDraw(BigDecimal amount, BigDecimal initialBalance, BigDecimal upperBound) throws InitialBalanceLimitationException {
         if(initialBalance.subtract(amount).compareTo(BigDecimal.ZERO) <= 0)
             throw new InitialBalanceLimitationException("InitialBalance limitation");
         return initialBalance.subtract(amount);
     }
 
-    public BigDecimal deposit(BigDecimal amount, BigDecimal initialBalance , BigDecimal upperBound)throws UpperBoundLimitationException {
+    public synchronized  BigDecimal doDeposit(BigDecimal amount, BigDecimal initialBalance, BigDecimal upperBound)throws UpperBoundLimitationException {
         if ((initialBalance.add(amount)).compareTo(upperBound) > 0)
             throw  new UpperBoundLimitationException("UpperBound limitation");
         return initialBalance.add(amount);

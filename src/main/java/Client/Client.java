@@ -1,4 +1,5 @@
 package Client;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -6,9 +7,15 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-public class Client {
-
+public class Client implements Runnable {
     public static void main(String[] args) {
+        for (int i = 0; i < 2; i++) {
+            new Thread(new Client()).start();
+        }
+    }
+
+    @Override
+    public void run() {
         TerminalParse terminalParse = new TerminalParse();
         terminalParse.xmlParseFunction();
         ArrayList<Transaction> transactionArray = terminalParse.getTransactionArray();
@@ -17,7 +24,7 @@ public class Client {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectOutputStream.writeObject(transactionArray);
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            while(true){
+            while (true) {
                 System.out.println(objectInputStream.readObject());
             }
         } catch (UnknownHostException e) {
@@ -27,5 +34,6 @@ public class Client {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
     }
 }

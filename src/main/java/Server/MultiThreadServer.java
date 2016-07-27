@@ -75,10 +75,10 @@ public class MultiThreadServer implements Runnable {
         try {
             String type = transaction.getTransactionType();
             Deposit deposit1 = deposit.checkValidation(transaction, depositArray);
-            if (type.equalsIgnoreCase("doDeposit")) {
+            if (type.equalsIgnoreCase("deposit")) {
                 newBalance = deposit.doDeposit(transaction.getTransactionAmount(), deposit1.getInitialBalance(), deposit1.getUpperBound());
             } else if (type.equalsIgnoreCase("withdraw")) {
-                newBalance = deposit.doWithDraw(transaction.getTransactionAmount(), deposit1.getInitialBalance(), deposit1.getUpperBound());
+                newBalance = deposit.doWithDraw(transaction.getTransactionAmount(), deposit1.getInitialBalance());
             }
             deposit1.setInitialBalance(newBalance);
             objectOutputStream.writeObject("Transaction was successful .New initial balance is " + newBalance);

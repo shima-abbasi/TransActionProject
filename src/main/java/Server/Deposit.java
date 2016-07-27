@@ -61,7 +61,7 @@ public class Deposit {
         this.initialBalance = initialBalance;
     }
 
-    public synchronized BigDecimal doWithDraw(BigDecimal amount, BigDecimal initialBalance, BigDecimal upperBound) throws InitialBalanceLimitationException {
+    public synchronized BigDecimal doWithDraw(BigDecimal amount, BigDecimal initialBalance) throws InitialBalanceLimitationException {
         if(initialBalance.subtract(amount).compareTo(BigDecimal.ZERO) <= 0)
             throw new InitialBalanceLimitationException("InitialBalance limitation");
         return initialBalance.subtract(amount);

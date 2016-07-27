@@ -17,8 +17,14 @@ import java.util.ArrayList;
 public class TerminalParse {
     String serverPort;
     String serverIP;
+    String filePath;
     Transaction transaction;
     ArrayList<Transaction> transactionArray = new ArrayList<Transaction>();
+
+    public TerminalParse(String filePath) {
+        this.filePath=filePath;
+
+    }
 
 
     public ArrayList<Transaction> getTransactionArray() {
@@ -37,7 +43,7 @@ public class TerminalParse {
 
         try {
             //----loading file-------------------
-            File fXmlFile = new File("src/main/resources/terminal.XML");
+            File fXmlFile = new File("src/main/resources/" + filePath);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fXmlFile);
